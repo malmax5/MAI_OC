@@ -1,0 +1,4 @@
+C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build/CMakeFiles/parent.dir
+C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build/CMakeFiles/child.dir
+C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build/CMakeFiles/edit_cache.dir
+C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build/CMakeFiles/rebuild_cache.dir

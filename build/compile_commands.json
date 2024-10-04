@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build",
+  "command": "C:/msys64/mingw64/bin/g++.exe  @CMakeFiles/parent.dir/includes_CXX.rsp  -std=c++14 -g -o CMakeFiles/parent.dir/src/exceptions/exceptions.cpp.obj -c C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/exceptions/exceptions.cpp",
+  "file": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/exceptions/exceptions.cpp",
+  "output": "CMakeFiles/parent.dir/src/exceptions/exceptions.cpp.obj"
+},
+{
+  "directory": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build",
+  "command": "C:/msys64/mingw64/bin/g++.exe  @CMakeFiles/parent.dir/includes_CXX.rsp  -std=c++14 -g -o CMakeFiles/parent.dir/src/parent.cpp.obj -c C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/parent.cpp",
+  "file": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/parent.cpp",
+  "output": "CMakeFiles/parent.dir/src/parent.cpp.obj"
+},
+{
+  "directory": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build",
+  "command": "C:/msys64/mingw64/bin/g++.exe  @CMakeFiles/child.dir/includes_CXX.rsp  -std=c++14 -g -o CMakeFiles/child.dir/src/exceptions/exceptions.cpp.obj -c C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/exceptions/exceptions.cpp",
+  "file": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/exceptions/exceptions.cpp",
+  "output": "CMakeFiles/child.dir/src/exceptions/exceptions.cpp.obj"
+},
+{
+  "directory": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/build",
+  "command": "C:/msys64/mingw64/bin/g++.exe  @CMakeFiles/child.dir/includes_CXX.rsp  -std=c++14 -g -o CMakeFiles/child.dir/src/child.cpp.obj -c C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/child.cpp",
+  "file": "C:/Users/CrazyBlackFire/Documents/Code/OC/Lab1/src/child.cpp",
+  "output": "CMakeFiles/child.dir/src/child.cpp.obj"
+}
+]
