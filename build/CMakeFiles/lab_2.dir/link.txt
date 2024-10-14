@@ -1,0 +1,1 @@
+/usr/bin/g++  -std=c++14 -g CMakeFiles/lab_2.dir/main.cpp.o CMakeFiles/lab_2.dir/src/Complex.cpp.o CMakeFiles/lab_2.dir/src/Matrix.cpp.o CMakeFiles/lab_2.dir/src/firstSolution.cpp.o CMakeFiles/lab_2.dir/src/secondSolution.cpp.o -o lab_2 

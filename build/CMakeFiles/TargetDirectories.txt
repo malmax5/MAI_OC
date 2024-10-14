@@ -1,0 +1,3 @@
+/home/cbf/MAI/OC/Lab_2/build/CMakeFiles/lab_2.dir
+/home/cbf/MAI/OC/Lab_2/build/CMakeFiles/edit_cache.dir
+/home/cbf/MAI/OC/Lab_2/build/CMakeFiles/rebuild_cache.dir

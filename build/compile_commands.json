@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/main.cpp.o -c /home/cbf/MAI/OC/Lab_2/main.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/main.cpp",
+  "output": "CMakeFiles/lab_2.dir/main.cpp.o"
+},
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/Complex.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/Complex.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/src/Complex.cpp",
+  "output": "CMakeFiles/lab_2.dir/src/Complex.cpp.o"
+},
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/Matrix.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/Matrix.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/src/Matrix.cpp",
+  "output": "CMakeFiles/lab_2.dir/src/Matrix.cpp.o"
+},
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/firstSolution.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/firstSolution.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/src/firstSolution.cpp",
+  "output": "CMakeFiles/lab_2.dir/src/firstSolution.cpp.o"
+},
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/secondSolution.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/secondSolution.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/src/secondSolution.cpp",
+  "output": "CMakeFiles/lab_2.dir/src/secondSolution.cpp.o"
+}
+]
