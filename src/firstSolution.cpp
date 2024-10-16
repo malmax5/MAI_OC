@@ -1,4 +1,5 @@
 #include "../includes/Matrix.hpp"
+#include <stdexcept>
 
 Matrix Matrix::DevideMatrixWithPids(Matrix& first, Matrix& other)
 {
@@ -19,13 +20,16 @@ Matrix Matrix::DevideMatrixWithPids(Matrix& first, Matrix& other)
             {
                 for (long unsigned int joinId = 0; joinId < threadId; joinId++)
                 {
-                    pthread_join(threads[joinId], NULL);
+                    if (pthread_join(threads[joinId], NULL) != 0)
+                        throw std::runtime_error("Can't join a thread");
                 }
                 threadId = 0;
             }
 
             threadArgs[threadId] = {&res, &first, &other, i, j};
-            pthread_create(&threads[threadId], NULL, DevideRowColumnByIndexis, &threadArgs[threadId]);
+
+            if (pthread_create(&threads[threadId], NULL, DevideRowColumnByIndexis, &threadArgs[threadId]) != 0)
+                throw std::runtime_error("Can't create a thread");
             threadId++;
         }
     }
@@ -34,7 +38,8 @@ Matrix Matrix::DevideMatrixWithPids(Matrix& first, Matrix& other)
     {
         for (long unsigned int joinId = 0; joinId < threadId; joinId++)
         {
-            pthread_join(threads[joinId], NULL);
+            if (pthread_join(threads[joinId], NULL) != 0)
+                throw std::runtime_error("Can't join a thread");
         }
         threadId = 0;
     }
@@ -50,6 +55,8 @@ void* Matrix::DevideRowColumnByIndexis(void* arg)
     Complex resNum;
     for (int i = 0; i < size.second; i++)
         resNum += (args->first->mat[args->rowFirst][i] * args->other->mat[i][args->columnOther]);
+    pthread_mutex_lock(&mutex);
     args->res->mat[args->rowFirst][args->columnOther] = resNum;
+    pthread_mutex_unlock(&mutex);
     pthread_exit(0);
 }

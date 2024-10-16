@@ -170,4 +170,11 @@ CMakeFiles/lab_2.dir/main.cpp.o: /home/cbf/MAI/OC/Lab_2/main.cpp \
  /usr/include/c++/13/bits/chrono.h /usr/include/c++/13/ratio \
  /usr/include/c++/13/ctime /usr/include/c++/13/bits/parse_numbers.h \
  /home/cbf/MAI/OC/Lab_2/includes/Matrix.hpp \
- /home/cbf/MAI/OC/Lab_2/includes/Complex.hpp
+ /home/cbf/MAI/OC/Lab_2/includes/Complex.hpp /usr/include/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
+ /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /usr/include/linux/close_range.h

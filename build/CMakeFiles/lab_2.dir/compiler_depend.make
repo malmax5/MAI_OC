@@ -111,6 +111,7 @@ CMakeFiles/lab_2.dir/main.cpp.o: /home/cbf/MAI/OC/Lab_2/main.cpp \
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/math.h \
@@ -121,20 +122,25 @@ CMakeFiles/lab_2.dir/main.cpp.o: /home/cbf/MAI/OC/Lab_2/main.cpp \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -144,6 +150,7 @@ CMakeFiles/lab_2.dir/main.cpp.o: /home/cbf/MAI/OC/Lab_2/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -189,6 +196,7 @@ CMakeFiles/lab_2.dir/main.cpp.o: /home/cbf/MAI/OC/Lab_2/main.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -492,6 +500,7 @@ CMakeFiles/lab_2.dir/src/Matrix.cpp.o: /home/cbf/MAI/OC/Lab_2/src/Matrix.cpp \
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/pthread.h \
@@ -500,20 +509,26 @@ CMakeFiles/lab_2.dir/src/Matrix.cpp.o: /home/cbf/MAI/OC/Lab_2/src/Matrix.cpp \
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -557,6 +572,7 @@ CMakeFiles/lab_2.dir/src/Matrix.cpp.o: /home/cbf/MAI/OC/Lab_2/src/Matrix.cpp \
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -678,6 +694,7 @@ CMakeFiles/lab_2.dir/src/firstSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/firstSo
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/pthread.h \
@@ -686,20 +703,26 @@ CMakeFiles/lab_2.dir/src/firstSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/firstSo
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/locale.h \
   /usr/include/x86_64-linux-gnu/bits/long-double.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -743,6 +766,7 @@ CMakeFiles/lab_2.dir/src/firstSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/firstSo
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -865,6 +889,7 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
   /usr/include/errno.h \
   /usr/include/features-time64.h \
   /usr/include/features.h \
+  /usr/include/linux/close_range.h \
   /usr/include/linux/errno.h \
   /usr/include/locale.h \
   /usr/include/math.h \
@@ -874,20 +899,25 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
   /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/time.h \
+  /usr/include/unistd.h \
   /usr/include/wchar.h \
   /usr/include/wctype.h \
   /usr/include/x86_64-linux-gnu/asm/errno.h \
   /usr/include/x86_64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/x86_64-linux-gnu/bits/byteswap.h \
+  /usr/include/x86_64-linux-gnu/bits/confname.h \
   /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
   /usr/include/x86_64-linux-gnu/bits/endian.h \
   /usr/include/x86_64-linux-gnu/bits/endianness.h \
+  /usr/include/x86_64-linux-gnu/bits/environments.h \
   /usr/include/x86_64-linux-gnu/bits/errno.h \
   /usr/include/x86_64-linux-gnu/bits/floatn-common.h \
   /usr/include/x86_64-linux-gnu/bits/floatn.h \
   /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
   /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
   /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_core.h \
+  /usr/include/x86_64-linux-gnu/bits/getopt_posix.h \
   /usr/include/x86_64-linux-gnu/bits/iscanonical.h \
   /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
   /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
@@ -897,6 +927,7 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
   /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls-narrow.h \
   /usr/include/x86_64-linux-gnu/bits/mathcalls.h \
+  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
   /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h \
   /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
@@ -940,6 +971,7 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
   /usr/include/x86_64-linux-gnu/bits/types/wint_t.h \
   /usr/include/x86_64-linux-gnu/bits/typesizes.h \
   /usr/include/x86_64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
   /usr/include/x86_64-linux-gnu/bits/waitflags.h \
   /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
   /usr/include/x86_64-linux-gnu/bits/wchar.h \
@@ -998,6 +1030,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/x86_64-linux-gnu/bits/waitflags.h:
 
+/usr/include/x86_64-linux-gnu/bits/unistd_ext.h:
+
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/timer_t.h:
@@ -1038,10 +1072,6 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/x86_64-linux-gnu/bits/struct_mutex.h:
 
-/usr/include/x86_64-linux-gnu/sys/select.h:
-
-/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
-
 /usr/include/x86_64-linux-gnu/bits/types/__fpos64_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/setjmp.h:
@@ -1052,6 +1082,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
+/usr/include/x86_64-linux-gnu/bits/posix_opt.h:
+
 /usr/include/x86_64-linux-gnu/bits/types/error_t.h:
 
 /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h:
@@ -1059,6 +1091,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 /usr/include/x86_64-linux-gnu/bits/locale.h:
 
 /usr/include/x86_64-linux-gnu/bits/iscanonical.h:
+
+/usr/include/x86_64-linux-gnu/bits/getopt_core.h:
 
 /usr/include/x86_64-linux-gnu/bits/fp-logb.h:
 
@@ -1074,13 +1108,15 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/x86_64-linux-gnu/bits/floatn-common.h:
 
-/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
-
-/usr/include/c++/13/bits/stl_numeric.h:
-
 /usr/include/x86_64-linux-gnu/gnu/stubs.h:
 
 /usr/include/x86_64-linux-gnu/bits/endian.h:
+
+/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
+
+/usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/c++/13/bits/stl_numeric.h:
 
 /usr/include/c++/13/bits/stl_construct.h:
 
@@ -1115,8 +1151,6 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 /usr/include/c++/13/bits/ostream_insert.h:
 
 /usr/include/c++/13/bits/parse_numbers.h:
-
-/usr/include/x86_64-linux-gnu/bits/cpu-set.h:
 
 /usr/include/c++/13/bits/locale_classes.tcc:
 
@@ -1157,6 +1191,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 /usr/include/features.h:
 
 /usr/include/c++/13/backward/binders.h:
+
+/usr/include/linux/close_range.h:
 
 /usr/include/asm-generic/errno-base.h:
 
@@ -1266,6 +1302,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/stdc-predef.h:
 
+/usr/include/x86_64-linux-gnu/bits/environments.h:
+
 /usr/include/c++/13/bits/invoke.h:
 
 /usr/include/c++/13/bits/stl_uninitialized.h:
@@ -1299,6 +1337,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 /usr/include/x86_64-linux-gnu/c++/13/bits/error_constants.h:
 
 /usr/include/c++/13/cmath:
+
+/usr/include/x86_64-linux-gnu/bits/confname.h:
 
 /usr/include/c++/13/bits/streambuf_iterator.h:
 
@@ -1364,6 +1404,8 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 
 /usr/include/c++/13/system_error:
 
+/usr/include/x86_64-linux-gnu/bits/getopt_posix.h:
+
 /usr/include/c++/13/bits/cxxabi_init_exception.h:
 
 /usr/include/c++/13/typeinfo:
@@ -1389,6 +1431,12 @@ CMakeFiles/lab_2.dir/src/secondSolution.cpp.o: /home/cbf/MAI/OC/Lab_2/src/second
 /usr/include/stdint.h:
 
 /usr/include/stdlib.h:
+
+/usr/include/x86_64-linux-gnu/sys/select.h:
+
+/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/unistd.h:
 
 /usr/include/x86_64-linux-gnu/bits/errno.h:
 

@@ -1,5 +1,8 @@
 #include "../includes/Matrix.hpp"
 
+int Matrix::maxThreads = 1;
+pthread_mutex_t Matrix::mutex = PTHREAD_MUTEX_INITIALIZER;
+
 Matrix::Matrix() : rows(0), columns(0) {}
 Matrix::Matrix(int rowsNum, int columnsNum) 
     : rows(rowsNum), columns(columnsNum)

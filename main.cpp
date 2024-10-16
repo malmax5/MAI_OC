@@ -4,7 +4,6 @@
 #include <chrono>
 #include "includes/Matrix.hpp"
 
-// Функция для генерации случайных комплексных чисел
 Complex randomComplex() {
     static std::random_device rd;
     static std::mt19937 gen(rd());
@@ -12,7 +11,6 @@ Complex randomComplex() {
     return Complex(dis(gen), dis(gen));
 }
 
-// Функция для заполнения матрицы случайными комплексными числами
 void fillMatrix(Matrix& matrix) {
     std::pair<int, int> size = matrix.GetSize();
     for (int i = 0; i < size.first; i++) {
@@ -22,7 +20,16 @@ void fillMatrix(Matrix& matrix) {
     }
 }
 
-int main() {
+int main(int argc, char* argv[]) 
+{
+    if (argc != 2)
+    {
+        std::cerr << "Usage: " << argv[0] << " <number_of_threads>" << std::endl;
+        return 1;
+    }
+
+    Matrix::SetMaxThreads(std::stoi(argv[1]));
+
     const int size = 100;
 
     Matrix m1(size, size);

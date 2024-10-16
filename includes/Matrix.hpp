@@ -6,6 +6,7 @@
 #include <vector>
 
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 
 class Matrix
@@ -40,8 +41,15 @@ public:
 
     friend std::ostream& operator<<(std::ostream& os, const Matrix& c);
 
+    static void SetMaxThreads(int numThreads)
+    {
+        int num_processors = sysconf(_SC_NPROCESSORS_ONLN);
+        maxThreads = numThreads < num_processors ? numThreads : num_processors;
+    }
+
 private:
-    static const int maxThreads = 5;
+    static int maxThreads;
+    static pthread_mutex_t mutex;
 
     std::vector<std::vector<Complex>> mat;
     int rows;
