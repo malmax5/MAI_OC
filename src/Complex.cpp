@@ -29,6 +29,17 @@ Complex& Complex::operator=(const Complex&& other)
     return *this;
 }
 
+bool Complex::operator==(const Complex& other) const
+{
+    return (this->real == other.real) && (this->img == other.img);
+}
+
+bool Complex::operator!=(const Complex& other) const
+{
+    return !(*this == other);
+}
+
+
 Complex Complex::operator+(const Complex& other)
 {
     Complex res;

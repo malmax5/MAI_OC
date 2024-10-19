@@ -249,6 +249,30 @@ src/secondSolution.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab_2.dir/build.make CMakeFiles/lab_2.dir/src/secondSolution.cpp.s
 .PHONY : src/secondSolution.cpp.s
 
+src/thirdSolution.o: src/thirdSolution.cpp.o
+.PHONY : src/thirdSolution.o
+
+# target to build an object file
+src/thirdSolution.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab_2.dir/build.make CMakeFiles/lab_2.dir/src/thirdSolution.cpp.o
+.PHONY : src/thirdSolution.cpp.o
+
+src/thirdSolution.i: src/thirdSolution.cpp.i
+.PHONY : src/thirdSolution.i
+
+# target to preprocess a source file
+src/thirdSolution.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab_2.dir/build.make CMakeFiles/lab_2.dir/src/thirdSolution.cpp.i
+.PHONY : src/thirdSolution.cpp.i
+
+src/thirdSolution.s: src/thirdSolution.cpp.s
+.PHONY : src/thirdSolution.s
+
+# target to generate assembly for a file
+src/thirdSolution.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/lab_2.dir/build.make CMakeFiles/lab_2.dir/src/thirdSolution.cpp.s
+.PHONY : src/thirdSolution.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -273,6 +297,9 @@ help:
 	@echo "... src/secondSolution.o"
 	@echo "... src/secondSolution.i"
 	@echo "... src/secondSolution.s"
+	@echo "... src/thirdSolution.o"
+	@echo "... src/thirdSolution.i"
+	@echo "... src/thirdSolution.s"
 .PHONY : help
 
 

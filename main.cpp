@@ -3,6 +3,7 @@
 #include <random>
 #include <chrono>
 #include "includes/Matrix.hpp"
+#include "includes/TaskQueue.hpp"
 
 Complex randomComplex() {
     static std::random_device rd;
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
 
     Matrix::SetMaxThreads(std::stoi(argv[1]));
 
-    const int size = 100;
+    const int size = 1000;
 
     Matrix m1(size, size);
     fillMatrix(m1);
@@ -59,9 +60,33 @@ int main(int argc, char* argv[])
     std::chrono::duration<double> duration3 = end - start;
     std::cout << "Time for threaded multiplication: " << duration3.count() << " seconds" << "\n--End--\n";
 
-    // std::cout << result1 << "\n";
-    // std::cout << result2 << "\n";
-    // std::cout << result3 << "\n";
+    std::cout << "--Divide with threads(third try)--" << "\n";
+    start = std::chrono::high_resolution_clock::now();
+    Matrix result4 = Matrix::DevideMatrixWithPids3(m1, m2);
+    end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> duration4 = end - start;
+    std::cout << "Time for threaded multiplication: " << duration4.count() << " seconds" << "\n--End--\n";
+
+    // Проверка корректности
+    std::cout << "Testing results for equality...\n";
+    bool equal1 = (result1 == result2);
+    bool equal2 = (result1 == result3);
+    bool equal3 = (result1 == result4);
+
+    if (equal1 && equal2 && equal3) {
+        std::cout << "All results are equal.\n";
+    } else {
+        std::cout << "Results differ:\n";
+        if (!equal1) {
+            std::cout << "Result1 is not equal to Result2.\n";
+        }
+        if (!equal2) {
+            std::cout << "Result1 is not equal to Result3.\n";
+        }
+        if (!equal3) {
+            std::cout << "Result1 is not equal to Result3.\n";
+        }
+    }
 
     return 0;
 }

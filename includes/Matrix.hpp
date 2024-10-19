@@ -31,9 +31,13 @@ public:
     static Matrix DevideMatrixWithPids2(Matrix& first, Matrix& other);
     static void* DevideRowColumnByIndexis2(void* arg);
 
+    //third try
+    static Matrix DevideMatrixWithPids3(Matrix& first, Matrix& other);
+
     Matrix& operator=(Matrix& other);
     Matrix& operator=(Matrix&& other);
     
+    bool operator==(const Matrix& other) const;
     Matrix operator*(Matrix& other);
 
     std::vector<Complex>& operator[](int index);

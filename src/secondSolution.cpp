@@ -1,43 +1,33 @@
 #include "../includes/Matrix.hpp"
 #include "cmath"
 
-Matrix Matrix::DevideMatrixWithPids2(Matrix& first, Matrix& other)
-{
+Matrix Matrix::DevideMatrixWithPids2(Matrix& first, Matrix& other) {
     if (first.rows != other.columns)
-        throw std::invalid_argument("Can't devide this matrixes");
-    
-    std::vector<pthread_t> threads(maxThreads + 1);
-    std::vector<ThreadArgs2> threadArgs(maxThreads + 1);
+        throw std::invalid_argument("Can't divide these matrices");
 
     Matrix res(first.rows, other.columns);
+    std::vector<pthread_t> threads(maxThreads);
+    std::vector<ThreadArgs2> threadArgs(maxThreads);
+
     int threadId = 0;
-    int k = (static_cast<int>((other.columns + other.columns % maxThreads) / maxThreads) == 0 ? 1 : static_cast<int>((other.columns + other.columns % maxThreads) / maxThreads));
 
-    int j = 0;
-    for (int i = 0; i < first.rows; i++)
-    {
-        for (j = k; j < other.columns; j += k)
-        {
-            threadArgs[threadId] = {&res, &first, &other, i, j - k, j};
-            
-            if (pthread_create(&threads[threadId], NULL, DevideRowColumnByIndexis2, &threadArgs[threadId]) != 0)
+    int columnsPerThread = (other.columns + maxThreads - 1) / maxThreads;
+
+    for (int i = 0; i < first.rows; i++) {
+        for (int j = 0; j < other.columns; j += columnsPerThread) {
+            int endColumn = std::min(j + columnsPerThread, other.columns);
+            threadArgs[threadId] = {&res, &first, &other, i, j, endColumn};
+
+            if (pthread_create(&threads[threadId], nullptr, DevideRowColumnByIndexis2, &threadArgs[threadId]) != 0) {
                 throw std::runtime_error("Can't create a thread");
+            }
             threadId++;
         }
 
-        if (j > other.columns)
-        {
-            threadArgs[threadId] = {&res, &first, &other, i, j - k, other.columns};
-            
-            if (pthread_create(&threads[threadId], NULL, DevideRowColumnByIndexis2, &threadArgs[threadId]) != 0)
-                throw std::runtime_error("Can't create a thread");
-            threadId++;
-        }
-
-        for (int joinId = 0; joinId < threadId; joinId++)
-        {
-            if (pthread_join(threads[joinId], NULL) != 0)
+        for (int joinId = 0; joinId < threadId; joinId++) {
+            if (pthread_join(threads[joinId], nullptr) != 0) {
                 throw std::runtime_error("Can't join a thread");
+            }
         }
 
         threadId = 0;
@@ -45,6 +35,7 @@ Matrix Matrix::DevideMatrixWithPids2(Matrix& first, Matrix& other)
 
     return res;
 }
+
 
 void* Matrix::DevideRowColumnByIndexis2(void* arg)
 {

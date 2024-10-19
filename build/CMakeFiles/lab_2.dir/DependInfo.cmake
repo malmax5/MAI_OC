@@ -13,6 +13,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cbf/MAI/OC/Lab_2/src/Matrix.cpp" "CMakeFiles/lab_2.dir/src/Matrix.cpp.o" "gcc" "CMakeFiles/lab_2.dir/src/Matrix.cpp.o.d"
   "/home/cbf/MAI/OC/Lab_2/src/firstSolution.cpp" "CMakeFiles/lab_2.dir/src/firstSolution.cpp.o" "gcc" "CMakeFiles/lab_2.dir/src/firstSolution.cpp.o.d"
   "/home/cbf/MAI/OC/Lab_2/src/secondSolution.cpp" "CMakeFiles/lab_2.dir/src/secondSolution.cpp.o" "gcc" "CMakeFiles/lab_2.dir/src/secondSolution.cpp.o.d"
+  "/home/cbf/MAI/OC/Lab_2/src/thirdSolution.cpp" "CMakeFiles/lab_2.dir/src/thirdSolution.cpp.o" "gcc" "CMakeFiles/lab_2.dir/src/thirdSolution.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

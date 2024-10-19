@@ -14,6 +14,7 @@ set(
     src/Matrix.cpp
     src/firstSolution.cpp
     src/secondSolution.cpp
+    src/thirdSolution.cpp
     includes/Complex.hpp
     includes/Matrix.hpp
 )
@@ -22,6 +23,8 @@ add_executable(
     lab_2
     ${SOURCES}
 )
+
+target_link_libraries(lab_2 PRIVATE pthread)
 
 if (MSVC)
 

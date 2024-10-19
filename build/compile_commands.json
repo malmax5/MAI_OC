@@ -28,5 +28,11 @@
   "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/secondSolution.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/secondSolution.cpp",
   "file": "/home/cbf/MAI/OC/Lab_2/src/secondSolution.cpp",
   "output": "CMakeFiles/lab_2.dir/src/secondSolution.cpp.o"
+},
+{
+  "directory": "/home/cbf/MAI/OC/Lab_2/build",
+  "command": "/usr/bin/g++    -std=c++14 -g -o CMakeFiles/lab_2.dir/src/thirdSolution.cpp.o -c /home/cbf/MAI/OC/Lab_2/src/thirdSolution.cpp",
+  "file": "/home/cbf/MAI/OC/Lab_2/src/thirdSolution.cpp",
+  "output": "CMakeFiles/lab_2.dir/src/thirdSolution.cpp.o"
 }
 ]

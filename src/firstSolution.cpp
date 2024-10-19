@@ -16,7 +16,7 @@ Matrix Matrix::DevideMatrixWithPids(Matrix& first, Matrix& other)
     {
         for (int j = 0; j < other.columns; j++)
         {
-            if (threadId == maxThreads)
+            if (threadId == static_cast<long unsigned int>(maxThreads))
             {
                 for (long unsigned int joinId = 0; joinId < threadId; joinId++)
                 {

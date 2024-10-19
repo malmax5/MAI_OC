@@ -24,6 +24,15 @@ std::pair<int, int> Matrix::GetSize() const
     return std::make_pair(this->rows, this->columns);
 }
 
+void Matrix::Print() {
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < columns; ++j) {
+            std::cout << mat[i][j] << " ";
+        }
+        std::cout << "\n";
+    }
+}
+
 Matrix Matrix::DevideMatrix(Matrix& first, Matrix& other)
 {
     if (first.rows != other.columns)
@@ -61,6 +70,24 @@ Matrix& Matrix::operator=(Matrix&& other)
 
     return *this;
 }
+
+bool Matrix::operator==(const Matrix& other) const {
+    auto sizeA = this->GetSize();
+    auto sizeB = other.GetSize();
+    if (sizeA != sizeB) return false;
+
+    for (int i = 0; i < sizeA.first; ++i) {
+        for (int j = 0; j < sizeA.second; ++j) {
+            const Complex& elementA = this->mat[i][j];
+            const Complex& elementB = other.mat[i][j];
+            if (elementA != elementB) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
 
 Matrix Matrix::operator*(Matrix& other)
 {
