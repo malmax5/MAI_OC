@@ -8,9 +8,29 @@
 #include <ctype.h>
 #include <signal.h>
 #include <cerrno>
+#include <sys/mman.h>
 
-void handle_sigusr1(int sig)
-{}
+#define SHARED_MEMORY_SIZE 1024
+
+static volatile sig_atomic_t sigflag;
+static sigset_t newmask, oldmask, zeromask;
+
+void handle_sigusr1(int sig) {
+    sigflag = 1;
+    printf("Дочерний процесс получил SIGUSR1\n");
+}
+
+void WAIT_PARENT(void)
+{
+    while (sigflag == 0)
+        sigsuspend(&zeromask);
+    sigflag = 0;
+}
+
+void TELL_PARENT(pid_t pid)
+{
+    kill(pid, SIGUSR2);
+}
 
 void log_error(const char *message) {
     FILE *log_file = fopen("log_child.txt", "a");
@@ -28,6 +48,27 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    int fd = open("/tmp/shared_memory_file", O_RDWR, 0666);
+    if (fd == -1) {
+        log_error("open");
+        exit(EXIT_FAILURE);
+    }
+
+    void *shared_mem_child = mmap(NULL, SHARED_MEMORY_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (shared_mem_child == MAP_FAILED) {
+        log_error("mmap");
+        exit(EXIT_FAILURE);
+    }
+
+    close(fd);
+
+    // Открытие файла для записи
+    int file = open(argv[1], O_WRONLY | O_APPEND | O_CREAT, 0666);  // Открываем файл для записи
+    if (file == -1) {
+        log_error("open");
+        exit(EXIT_FAILURE);
+    }
+
     struct sigaction sa;
     sa.sa_handler = handle_sigusr1;
     sigemptyset(&sa.sa_mask);
@@ -39,7 +80,6 @@ int main(int argc, char *argv[]) {
 
     pid_t parentPID = getppid();
 
-    sigset_t newmask, oldmask, zeromask;
     sigemptyset(&newmask);
     sigaddset(&newmask, SIGUSR1);
     sigemptyset(&zeromask);
@@ -49,44 +89,32 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    char *filename = argv[1];
-    int file = open(filename, O_WRONLY | O_APPEND);
-    if (file == -1) {
-        log_error("open");
-        exit(EXIT_FAILURE);
-    }
-
-    char str[1024];
+    char str[SHARED_MEMORY_SIZE] = {0};  // Инициализация нулями
     char letter;
     int i = 0;
     int errorCode;
 
     while (1) {
-        sigsuspend(&zeromask);
+        WAIT_PARENT();
 
-        while (read(STDIN_FILENO, &letter, sizeof(letter))) {
-            str[i++] = letter;
-            if (letter == '\0') break;
-        }
+        strncpy(str, (char *)shared_mem_child, SHARED_MEMORY_SIZE);
 
         if (strcmp(str, "quit") == 0) {
-            kill(parentPID, SIGUSR2);
+            TELL_PARENT(parentPID);
             break;
         }
 
         if (isupper(str[0])) {
-            write(file, str, i);
-            write(file, "\n", sizeof(char));
+            write(file, str, strlen(str));
+            write(file, "\n", 1);
             errorCode = 0;
         } else {
             errorCode = 1;
         }
 
-        if (write(STDERR_FILENO, &errorCode, sizeof(errorCode)) == -1) {
-            log_error("write");
-            exit(EXIT_FAILURE);
-        }
-        kill(parentPID, SIGUSR2);
+        *((int *)((char *)shared_mem_child + SHARED_MEMORY_SIZE - sizeof(int))) = errorCode;
+
+        TELL_PARENT(parentPID);
 
         i = 0;
     }
@@ -96,7 +124,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    close(file);
+    close(file);  // Закрытие файла
 
     exit(EXIT_SUCCESS);
 }

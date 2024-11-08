@@ -6,16 +6,37 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <sys/mman.h>
 
-void handle_sigusr2(int sig)
-{}
+#define SHARED_MEMORY_SIZE 1024
 
-void handle_child_ready(int sig)
-{}
+static volatile sig_atomic_t sigflag;
+static sigset_t newmask, oldmask, zeromask;
 
-void handle_sigpipe(int sig)
-{
+void handle_sigusr2(int sig) {
+    sigflag = 1;
+    printf("Родительский процесс получил SIGUSR2\n");
+}
+
+void handle_child_ready(int sig) {
+    sigflag = 1;
+    printf("Родительский процесс получил SIGUSR1\n");
+}
+
+void handle_sigpipe(int sig) {
     perror("SIGPIPE, bad in child\n");
+}
+
+void WAIT_CHILD(void)
+{
+    while (sigflag == 0)
+        sigsuspend(&zeromask);
+    sigflag = 0;
+}
+
+void TELL_CHILD(pid_t pid)
+{
+    kill(pid, SIGUSR1);
 }
 
 int main(int argc, char *argv[]) {
@@ -45,7 +66,6 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    sigset_t newmask, oldmask, zeromask;
     sigemptyset(&newmask);
     sigaddset(&newmask, SIGUSR1);
     sigemptyset(&zeromask);
@@ -56,45 +76,33 @@ int main(int argc, char *argv[]) {
     }
 
     char *filename = argv[1];
-    int file = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-    if (file == -1) {
+
+    int fd = open("/tmp/shared_memory_file", O_RDWR | O_CREAT, 0666);
+    if (fd == -1) {
         perror("open");
         exit(EXIT_FAILURE);
     }
 
-    int pipe1[2];
-    int pipe2[2];
-
-    if (pipe(pipe1) == -1 || pipe(pipe2) == -1) {
-        perror("pipe");
+    if (ftruncate(fd, SHARED_MEMORY_SIZE) == -1) {
+        perror("ftruncate");
         exit(EXIT_FAILURE);
     }
 
-    pid_t pid = fork();
+    void *shared_memory = mmap(NULL, SHARED_MEMORY_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0);
+    if (shared_memory == MAP_FAILED) {
+        perror("mmap");
+        exit(EXIT_FAILURE);
+    }
 
+    close(fd);
+
+    pid_t pid = fork();
     if (pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
     }
 
     if (pid == 0) {
-        close(pipe1[1]);
-        close(pipe2[0]);
-
-        if (dup2(pipe1[0], STDIN_FILENO) == -1) {
-            perror("dup2");
-            exit(EXIT_FAILURE);
-        }
-
-        if (dup2(pipe2[1], STDERR_FILENO) == -1) {
-            perror("dup2");
-            exit(EXIT_FAILURE);
-        }
-
-        close(pipe1[0]);
-        close(pipe2[1]);
-        close(file);
-
         kill(getppid(), SIGUSR1);
 
         char *args[] = {"./child", filename, NULL};
@@ -103,11 +111,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
     } else {
-        close(pipe1[0]);
-        close(pipe2[1]);
-        close(file);
-
-        sigsuspend(&zeromask);
+        WAIT_CHILD();
 
         char buffer[1024];
 
@@ -118,29 +122,18 @@ int main(int argc, char *argv[]) {
                 exit(EXIT_FAILURE);
             }
 
-            buffer[strcspn(buffer, "\n")] = '\0'; 
+            buffer[strcspn(buffer, "\n")] = '\0';
 
+            snprintf((char *)shared_memory, SHARED_MEMORY_SIZE, "%s", buffer);
 
-            if (write(pipe1[1], buffer, strlen(buffer) + 1) == -1) {
-                perror("write");
-                exit(EXIT_FAILURE);
-            }
-
-            kill(pid, SIGUSR1);
+            TELL_CHILD(pid);
 
             if (strcmp(buffer, "quit") == 0) 
-            {
                 break;
-            }
 
-            sigsuspend(&zeromask);
+            WAIT_CHILD();
 
-            int errorCode;
-
-            if (read(pipe2[0], &errorCode, sizeof(errorCode)) == -1) {
-                perror("read");
-                exit(EXIT_FAILURE);
-            }
+            int errorCode = *((int *)((char *)shared_memory + SHARED_MEMORY_SIZE - sizeof(int)));
 
             if (errorCode == 1) {
                 printf("Строка не начинается с заглавной буквы: %s\n", buffer);
@@ -154,9 +147,7 @@ int main(int argc, char *argv[]) {
             return 1;
         }
 
-        close(pipe1[1]);
-        close(pipe2[0]);
-
+        munmap(shared_memory, SHARED_MEMORY_SIZE);
         wait(NULL);
         exit(EXIT_SUCCESS);
     }
