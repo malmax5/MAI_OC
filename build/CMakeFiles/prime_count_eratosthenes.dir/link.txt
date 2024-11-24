@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libprime_count_eratosthenes.so -o libprime_count_eratosthenes.so CMakeFiles/prime_count_eratosthenes.dir/Lib/src/Func_1/prime_count_eratosthenes.cpp.o 

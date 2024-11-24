@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main_compile_time.dir/Main1/main1.cpp.o -o main_compile_time  -Wl,-rpath,/home/cbf/MAI/OC/Lab_4/build libprime_count_eratosthenes.so libe_formule.so 

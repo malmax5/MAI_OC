@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "prime_count_naive.h": "c",
+        "cmath": "cpp",
+        "iostream": "cpp"
+    }
+}

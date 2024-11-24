@@ -1,0 +1,8 @@
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/prime_count_eratosthenes.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/prime_count_naive.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/e_formule.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/e_series.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/main_compile_time.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/main_runtime.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/edit_cache.dir
+/home/cbf/MAI/OC/Lab_4/build/CMakeFiles/rebuild_cache.dir
