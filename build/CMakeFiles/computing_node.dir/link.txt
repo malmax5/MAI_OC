@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/computing_node.dir/computing_node.c.o -o computing_node  -lzmq 

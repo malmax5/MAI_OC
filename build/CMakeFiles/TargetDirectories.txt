@@ -1,0 +1,4 @@
+/home/cbf/MAI/OC/Lab_5/build/CMakeFiles/controller.dir
+/home/cbf/MAI/OC/Lab_5/build/CMakeFiles/computing_node.dir
+/home/cbf/MAI/OC/Lab_5/build/CMakeFiles/edit_cache.dir
+/home/cbf/MAI/OC/Lab_5/build/CMakeFiles/rebuild_cache.dir

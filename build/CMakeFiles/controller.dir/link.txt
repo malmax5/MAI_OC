@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/controller.dir/managing_node.c.o -o controller  -lzmq 
