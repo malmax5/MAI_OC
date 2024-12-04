@@ -99,11 +99,11 @@ void process_command(const char *command, void *router, int stdin_fd) {
             printf("Error: Not found\n");
             return;
         }
-
+    
         // Switch stdin to blocking mode
         int flags = fcntl(stdin_fd, F_GETFL, 0);
         fcntl(stdin_fd, F_SETFL, flags & ~O_NONBLOCK);
-
+    
         char text[256];
         printf("Enter text_string: ");
         if (!fgets(text, sizeof(text), stdin)) {
@@ -112,7 +112,7 @@ void process_command(const char *command, void *router, int stdin_fd) {
             return;
         }
         text[strcspn(text, "\n")] = 0;
-
+    
         char pattern[256];
         printf("Enter pattern_string: ");
         if (!fgets(pattern, sizeof(pattern), stdin)) {
@@ -121,17 +121,16 @@ void process_command(const char *command, void *router, int stdin_fd) {
             return;
         }
         pattern[strcspn(pattern, "\n")] = 0;
-
+    
         // Switch stdin back to non-blocking mode
         fcntl(stdin_fd, F_SETFL, flags);
-
+    
         // Send "exec" command to the node
         zmq_send(router, node->identity, node->identity_len, ZMQ_SNDMORE);
-        zmq_send(router, "", 0, ZMQ_SNDMORE); // Empty frame as delimiter
         zmq_send(router, "exec", 4, ZMQ_SNDMORE);
         zmq_send(router, text, strlen(text), ZMQ_SNDMORE);
         zmq_send(router, pattern, strlen(pattern), 0);
-
+    
         // Receive response
         zmq_pollitem_t items[] = {
             { router, 0, ZMQ_POLLIN, 0 }
@@ -145,22 +144,17 @@ void process_command(const char *command, void *router, int stdin_fd) {
             printf("Timeout: No response from node %d\n", id);
             return;
         }
-
-        // Receive node identity
-        char identity[256];
-        size_t identity_len = zmq_recv(router, identity, sizeof(identity)-1, 0);
-        identity[identity_len] = '\0';
-
+    
         // Receive empty frame
-        char delimiter[1];
-        size_t delimiter_len = zmq_recv(router, delimiter, 1, 0);
-
-        // Receive response message
-        char response[256];
-        size_t response_len = zmq_recv(router, response, sizeof(response)-1, 0);
-        response[response_len] = '\0';
-
-        printf("Ok:%s\n", response);
+        char empty_frame[1];
+        size_t empty_len = zmq_recv(router, empty_frame, sizeof(empty_frame)-1, 0);
+    
+        // Receive result
+        char result[256];
+        size_t result_len = zmq_recv(router, result, sizeof(result)-1, 0);
+        result[result_len] = '\0';
+    
+        printf("Ok:%s\n", result);
     } else {
         printf("Unknown command.\n");
     }

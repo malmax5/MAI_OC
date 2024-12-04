@@ -77,7 +77,6 @@ int main(int argc, char *argv[]) {
             char* result = find_positions(text, pattern);
 
             // Send back the result
-            zmq_send(dealer, "", 0, ZMQ_SNDMORE); // Empty frame
             zmq_send(dealer, result, strlen(result), 0);
 
             free(result);
