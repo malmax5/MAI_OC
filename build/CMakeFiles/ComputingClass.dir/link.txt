@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++14 CMakeFiles/ComputingClass.dir/ComputingClass.cpp.o -o ComputingClass  -lzmq 

@@ -1,0 +1,1 @@
+/usr/bin/c++  -std=c++14 CMakeFiles/ManagingClass.dir/ManagingClass.cpp.o -o ManagingClass  -lzmq 
