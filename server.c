@@ -3,6 +3,7 @@
 #include <string.h>
 #include <zmq.h>
 #include <pthread.h>
+#include <errno.h>
 
 #define PORT "5555"
 
@@ -17,14 +18,16 @@ pthread_mutex_t client_list_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void add_client(const char *identity, const char *username) {
     Client *new_client = (Client *)malloc(sizeof(Client));
-    if (new_client) {
-        strncpy(new_client->identity, identity, 255);
-        new_client->identity[255] = '\0';
-        strncpy(new_client->username, username, 99);
-        new_client->username[99] = '\0';
-        new_client->next = clients;
-        clients = new_client;
+    if (!new_client) {
+        fprintf(stderr, "Memory allocation failed.\n");
+        return;
     }
+    strncpy(new_client->identity, identity, 255);
+    new_client->identity[255] = '\0';
+    strncpy(new_client->username, username, 99);
+    new_client->username[99] = '\0';
+    new_client->next = clients;
+    clients = new_client;
 }
 
 void remove_client(const char *identity) {
@@ -58,10 +61,46 @@ Client *find_client_by_username(const char *username) {
     return current;
 }
 
+void save_message(const char *sender, const char *recipient, const char *content) {
+    if (strcmp(sender, recipient) < 0) {
+        char filename[256];
+        snprintf(filename, sizeof(filename), "db/%s_%s.txt", sender, recipient);
+        FILE *fp = fopen(filename, "a");
+        if (!fp) {
+            perror("Failed to open file for writing");
+            return;
+        }
+        if (fprintf(fp, "%s: %s\n", sender, content) < 0)
+            perror("Failed to write to file");
+        fclose(fp);
+    } else {
+        char filename[256];
+        snprintf(filename, sizeof(filename), "db/%s_%s.txt", recipient, sender);
+        FILE *fp = fopen(filename, "a");
+        if (!fp) {
+            perror("Failed to open file for writing");
+            return;
+        }
+        if (fprintf(fp, "%s: %s\n", sender, content) < 0)
+            perror("Failed to write to file");
+        fclose(fp);
+    }
+}
+
 int main() {
     void *context = zmq_ctx_new();
     void *router = zmq_socket(context, ZMQ_ROUTER);
-    zmq_bind(router, "tcp://*:5555");
+    if (!router) {
+        fprintf(stderr, "Failed to create router socket.\n");
+        zmq_ctx_destroy(context);
+        return -1;
+    }
+    if (zmq_bind(router, "tcp://*:5555") == -1) {
+        fprintf(stderr, "Binding failed: %s\n", zmq_strerror(zmq_errno()));
+        zmq_close(router);
+        zmq_ctx_destroy(context);
+        return -1;
+    }
 
     printf("Server is running on port %s\n", PORT);
 
@@ -69,14 +108,16 @@ int main() {
         char identity[256];
         size_t identity_len = zmq_recv(router, identity, sizeof(identity)-1, 0);
         if (identity_len == -1) {
-            continue; // Handle error
+            fprintf(stderr, "Recv identity failed: %s\n", zmq_strerror(zmq_errno()));
+            continue;
         }
         identity[identity_len] = '\0';
 
         char message[256];
         size_t message_len = zmq_recv(router, message, sizeof(message)-1, 0);
         if (message_len == -1) {
-            continue; // Handle error
+            fprintf(stderr, "Recv message failed: %s\n", zmq_strerror(zmq_errno()));
+            continue;
         }
         message[message_len] = '\0';
 
@@ -89,29 +130,56 @@ int main() {
             char *recipient = strtok(msg, ":");
             char *content = strtok(NULL, "\n");
             if (!recipient || !content) {
-                // Invalid message format
+                char error_msg[] = "Invalid message format\n";
+                zmq_send(router, identity, strlen(identity), ZMQ_SNDMORE);
+                zmq_send(router, error_msg, sizeof(error_msg)-1, 0);
                 continue;
             }
             Client *recipient_client = find_client_by_username(recipient);
             if (recipient_client) {
-                printf("Find %s", recipient_client->username);
-                printf("\n");
-                // Get sender's username
                 Client *sender_client = find_client_by_username(identity);
                 if (sender_client) {
                     char sendbuf[256];
                     snprintf(sendbuf, sizeof(sendbuf), "RECEIVED:%s:%s", sender_client->username, content);
-                    zmq_send(router, recipient_client->identity, strlen(recipient_client->identity), ZMQ_SNDMORE);
-                    zmq_send(router, sendbuf, strlen(sendbuf), 0);
+                    if (zmq_send(router, recipient_client->identity, strlen(recipient_client->identity), ZMQ_SNDMORE) == -1 ||
+                        zmq_send(router, sendbuf, strlen(sendbuf), 0) == -1) {
+                        fprintf(stderr, "Send message failed: %s\n", zmq_strerror(zmq_errno()));
+                    }
+                    save_message(sender_client->username, recipient, content);
                 }
             } else {
-                // Recipient not found
                 char error_msg[] = "Error: Recipient not found\n";
                 zmq_send(router, identity, strlen(identity), ZMQ_SNDMORE);
                 zmq_send(router, error_msg, sizeof(error_msg)-1, 0);
             }
+        } else if (strncmp(message, "CHAT:", 5) == 0) {
+            char *username = message + 5;
+            Client *sender_client = find_client_by_username(identity);
+            if (sender_client) {
+                char filename[256];
+                if (strcmp(sender_client->username, username) < 0) {
+                    snprintf(filename, sizeof(filename), "db/%s_%s.txt", sender_client->username, username);
+                } else {
+                    snprintf(filename, sizeof(filename), "db/%s_%s.txt", username, sender_client->username);
+                }
+                FILE *fp = fopen(filename, "r");
+                if (fp) {
+                    char line[256];
+                    while (fgets(line, sizeof(line), fp)) {
+                        zmq_send(router, identity, strlen(identity), ZMQ_SNDMORE);
+                        zmq_send(router, line, strlen(line), 0);
+                    }
+                    fclose(fp);
+                } else {
+                    char error_msg[] = "No history found.\n";
+                    zmq_send(router, identity, strlen(identity), ZMQ_SNDMORE);
+                    zmq_send(router, error_msg, sizeof(error_msg)-1, 0);
+                }
+            }
+        } else if (strcmp(message, "QUIT") == 0) {
+            remove_client(identity);
+            printf("Client %s disconnected\n", identity);
         } else {
-            // Invalid message
             char error_msg[] = "Invalid message format\n";
             zmq_send(router, identity, strlen(identity), ZMQ_SNDMORE);
             zmq_send(router, error_msg, sizeof(error_msg)-1, 0);
