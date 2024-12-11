@@ -1,0 +1,4 @@
+/home/cbf/MAI/OC/KP/build/CMakeFiles/server.dir
+/home/cbf/MAI/OC/KP/build/CMakeFiles/client.dir
+/home/cbf/MAI/OC/KP/build/CMakeFiles/edit_cache.dir
+/home/cbf/MAI/OC/KP/build/CMakeFiles/rebuild_cache.dir
